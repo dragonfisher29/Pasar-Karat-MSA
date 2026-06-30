@@ -46,10 +46,10 @@ export function SellerDashboardPanel({ listings }: SellerDashboardPanelProps) {
           <div className="space-y-3">
             <div className="flex flex-wrap items-center gap-2">
               <span className="accent-pill rounded-full px-3 py-1 text-xs font-medium">{listing.category}</span>
-              <span className="rounded-full border border-white/10 px-3 py-1 text-xs text-zinc-300">
+              <span className="surface-pill rounded-full px-3 py-1 text-xs">
                 {listing.status}
               </span>
-              <span className="rounded-full border border-white/10 px-3 py-1 text-xs text-zinc-300">
+              <span className="surface-pill rounded-full px-3 py-1 text-xs">
                 {listing.moderation_status}
               </span>
             </div>
@@ -61,7 +61,7 @@ export function SellerDashboardPanel({ listings }: SellerDashboardPanelProps) {
           </div>
 
           <div className="flex flex-col items-start gap-3">
-            <p className="text-lg font-semibold text-orange-300">RM {listing.price}</p>
+            <p className="text-lg font-semibold text-rose-200">RM {listing.price}</p>
             {listing.status === "available" ? (
               <SoldButton listingId={listing.id} />
             ) : (

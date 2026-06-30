@@ -80,7 +80,7 @@ export default async function Home() {
               <p className="text-sm uppercase tracking-[0.35em] text-zinc-500">Featured items</p>
               <h3 className="mt-2 text-2xl font-semibold text-white">Fresh finds from the community</h3>
             </div>
-            <Link className="text-sm font-medium text-orange-300" href="/listings">
+            <Link className="accent-link text-sm font-medium" href="/listings">
               View all
             </Link>
           </div>
@@ -99,7 +99,7 @@ export default async function Home() {
             <p className="text-sm uppercase tracking-[0.35em] text-zinc-500">Categories</p>
             <h3 className="mt-2 text-2xl font-semibold text-white">Browse the kinds of items your community sells most</h3>
           </div>
-          <Link className="text-sm font-medium text-orange-300" href="/favorites">
+          <Link className="accent-link text-sm font-medium" href="/favorites">
             View favorites
           </Link>
         </div>
@@ -108,7 +108,7 @@ export default async function Home() {
           {categories.map((category) => (
             <Link
               key={category}
-              className="rounded-full border border-white/10 bg-white/4 px-4 py-2 text-sm text-zinc-200 transition hover:border-orange-400/40 hover:text-orange-200"
+              className="surface-pill rounded-full px-4 py-2 text-sm transition hover:border-rose-200/25 hover:text-rose-50"
               href={`/listings?category=${encodeURIComponent(category)}`}
             >
               {category}

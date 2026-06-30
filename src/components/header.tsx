@@ -17,7 +17,7 @@ export async function Header() {
     <header className="glass-panel sticky top-4 z-20 mb-8 rounded-full px-4 py-3 sm:px-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <Link className="flex items-center gap-3" href="/">
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-orange-500/15 text-sm font-semibold text-orange-300">
+          <div className="brand-mark flex h-11 w-11 items-center justify-center rounded-full text-sm font-semibold">
             PK
           </div>
           <div>

@@ -28,7 +28,7 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
           <span className="accent-pill inline-flex rounded-full px-3 py-1 text-xs font-medium uppercase tracking-[0.3em]">
             {listing.category}
           </span>
-          <span className="rounded-full border border-white/10 px-3 py-1 text-xs text-zinc-300">{listing.condition}</span>
+          <span className="surface-pill rounded-full px-3 py-1 text-xs">{listing.condition}</span>
           <FavoriteButton listingId={listing.id} />
         </div>
         <h2 className="mt-5 text-4xl font-semibold tracking-tight text-white">{listing.name}</h2>
@@ -37,7 +37,7 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           <div className="rounded-[1.5rem] border border-white/8 bg-white/4 p-4">
             <p className="text-sm text-zinc-500">Price</p>
-            <p className="mt-2 text-2xl font-semibold text-orange-300">{formatPrice(listing.price)}</p>
+            <p className="mt-2 text-2xl font-semibold text-rose-200">{formatPrice(listing.price)}</p>
           </div>
           <div className="rounded-[1.5rem] border border-white/8 bg-white/4 p-4">
             <p className="text-sm text-zinc-500">Condition</p>

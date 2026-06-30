@@ -103,7 +103,7 @@ export function SellForm({ user }: SellFormProps) {
         <label className="mb-2 block text-sm font-medium text-zinc-300" htmlFor="location">
           Meetup location
         </label>
-        <input className="field" id="location" name="location" placeholder="Petaling Jaya" required />
+        <input className="field" id="location" name="location" placeholder="Address" required />
       </div>
 
       <div className="sm:col-span-2">
@@ -114,7 +114,7 @@ export function SellForm({ user }: SellFormProps) {
           className="field"
           id="paymentMethod"
           name="paymentMethod"
-          placeholder="DuitNow, bank transfer, cash on meetup"
+          placeholder="bank transfer, cash on meetup"
           required
         />
       </div>

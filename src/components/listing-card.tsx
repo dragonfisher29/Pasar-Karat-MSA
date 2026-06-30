@@ -14,7 +14,7 @@ export function ListingCard({ listing }: ListingCardProps) {
       <div className="listing-image relative aspect-[4/3] overflow-hidden">
         <Image
           alt={listing.name}
-          className="object-cover mix-blend-luminosity"
+          className="object-cover"
           fill
           sizes="(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 100vw"
           src={listing.image_url}
@@ -23,7 +23,7 @@ export function ListingCard({ listing }: ListingCardProps) {
         <div className="absolute inset-x-0 bottom-0 flex items-center justify-between p-5">
           <div className="flex flex-wrap gap-2">
             <span className="accent-pill rounded-full px-3 py-1 text-xs font-medium">{listing.condition}</span>
-            <span className="rounded-full bg-black/40 px-3 py-1 text-xs text-zinc-200">{listing.category}</span>
+            <span className="surface-pill rounded-full px-3 py-1 text-xs font-medium">{listing.category}</span>
           </div>
           <FavoriteButton listingId={listing.id} />
         </div>
@@ -33,19 +33,19 @@ export function ListingCard({ listing }: ListingCardProps) {
         <div className="flex items-start justify-between gap-3">
           <div>
             <h2 className="text-xl font-semibold text-white">{listing.name}</h2>
-            <p className="mt-2 text-sm text-zinc-500">
+            <p className="mt-2 text-sm text-zinc-300">
               {listing.seller_name} · {listing.location}
             </p>
-            <p className="mt-2 line-clamp-2 text-sm text-zinc-400">{listing.description}</p>
+            <p className="mt-2 line-clamp-2 text-sm text-zinc-200/90">{listing.description}</p>
           </div>
-          <p className="text-lg font-semibold text-orange-300">{formatPrice(listing.price)}</p>
+          <p className="text-lg font-semibold text-rose-200">{formatPrice(listing.price)}</p>
         </div>
 
-        <div className="flex items-center justify-between gap-3 text-sm text-zinc-400">
+        <div className="flex items-center justify-between gap-3 text-sm text-zinc-200/85">
           <span>
             {listing.rating}/5 · {listing.payment_method}
           </span>
-          <Link className="text-orange-300 transition hover:text-orange-200" href={`/listings/${listing.id}`}>
+          <Link className="accent-link text-sm font-medium" href={`/listings/${listing.id}`}>
             View details
           </Link>
         </div>

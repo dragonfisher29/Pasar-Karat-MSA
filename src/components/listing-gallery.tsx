@@ -23,7 +23,7 @@ export function ListingGallery({ images, name }: ListingGalleryProps) {
       <div className="listing-image relative aspect-[5/4]">
         <Image
           alt={name}
-          className="object-cover mix-blend-luminosity"
+          className="object-cover"
           fill
           sizes="(min-width: 1024px) 52vw, 100vw"
           src={activeImage}
@@ -36,7 +36,7 @@ export function ListingGallery({ images, name }: ListingGalleryProps) {
           <button
             key={`${image}-${index}`}
             className={`relative aspect-[4/3] overflow-hidden rounded-2xl border ${
-              activeImage === image ? "border-orange-400/50" : "border-white/10"
+              activeImage === image ? "border-rose-200/40" : "border-white/10"
             }`}
             onClick={() => setActiveImage(image)}
             type="button"
