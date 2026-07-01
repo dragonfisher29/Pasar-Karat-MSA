@@ -44,6 +44,8 @@ export async function createUserSession(userId: string) {
     return false;
   }
 
+  await supabase.from("marketplace_sessions").delete().eq("user_id", userId);
+
   const rawToken = randomBytes(32).toString("hex");
   const expiresAt = new Date(Date.now() + sessionDurationMs).toISOString();
 
@@ -63,6 +65,7 @@ export async function createUserSession(userId: string) {
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
     path: "/",
+    maxAge: Math.floor(sessionDurationMs / 1000),
     expires: new Date(expiresAt),
   });
 

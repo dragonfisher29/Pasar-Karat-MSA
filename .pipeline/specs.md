@@ -1,23 +1,42 @@
-# Profile Editing Feature
+## Security Hardening Spec (Issues 1–6)
 
-## Request
-- Allow signed-in users to edit their profile.
-- When clicking the signed-in user name in the header, redirect to a user page.
+### 1) Supabase Storage: Public upload policy
+- Remove/replace any Storage policy that allows unauthenticated/public inserts (uploads) to the listing media bucket.
+- Require authenticated uploads only.
+- Restrict object path prefix to `listings/` (no other prefixes).
+- Enforce basic file size + type constraints at upload time (client-side) and add best-effort server-side policy checks where feasible using `storage.objects.metadata`.
+- Consider making the bucket non-public (`public = false`) so objects require signed URLs or authenticated access.
 
-## Scope
-- Add a dedicated authenticated user page at `/user`.
-- Add a profile edit form for `display_name` and `phone_number`.
-- Add a server action to validate and persist profile changes.
-- Update the header so the user name chip links to `/user`.
-- Keep marketplace listing contact details in sync when a user updates their profile.
+### 2) Auth: Open redirect via `next` parameter
+- Validate `nextPath` so it only permits internal navigation.
+- Allow only paths that:
+  - start with `/`
+  - do not start with `//` (protocol-relative)
+  - do not contain a URL scheme/protocol (e.g., `http:`, `https:`)
+- If invalid, ignore and fall back to a safe default path.
 
-## Implementation Notes
-- Reuse existing auth validation patterns with Zod.
-- Use the existing `marketplace_users` table and session-based auth flow.
-- Update `listings.seller_name` and `listings.whatsapp_number` for the current user after a profile change.
-- Revalidate affected routes so the updated profile is reflected across the UI.
+### 3) Auth: Brute-force/rate limiting on password auth
+- Add rate limiting for `signIn` keyed by `IP + identifier` (phone/email).
+- Add incremental delays on repeated failures.
+- Add a temporary lockout after N failures within a window.
+- Reset counters on successful login.
 
-## UX
-- If the user is not signed in, `/user` redirects through the existing auth flow.
-- The profile page shows current account details and allows inline editing.
-- Success and error states should be shown on the form page.
+### 4) Session cookies: Hardening gaps
+- Harden cookie settings where controlled by the server integration:
+  - set `maxAge`
+  - consider `SameSite=Strict` if feasible (otherwise keep `Lax`)
+- Add a lightweight same-origin check for state-changing server actions where possible (CSRF mitigation).
+
+### 5) Upload path sanitization
+- Sanitize filenames before composing storage paths:
+  - strip path separators (`/` and `\`)
+  - strip `..`
+  - allow only a safe character set in the final name
+  - ensure a non-empty filename and preserve extension when possible
+
+### 6) Security headers
+- Add baseline headers via Next config:
+  - `Content-Security-Policy` (starter policy suitable for Next.js)
+  - `X-Content-Type-Options: nosniff`
+  - `Referrer-Policy`
+  - `Permissions-Policy`

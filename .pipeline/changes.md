@@ -1,59 +1,34 @@
-# Pipeline Coder Output
+## Implemented Changes
 
-## Implementation Summary
+### Storage hardening (Public upload removed)
+- Added a new Supabase migration to remove the `Public can upload listing media` policy and re-create the `Public can view listing media` policy with a `listings/` prefix restriction.
+- Migrations:
+  - `supabase/migrations/004_storage_policy_hardening.sql`
 
-Replaced the one-time seller manage code flow with a simple phone-number-and-password account system, while preserving the marketplace features already added in the previous phase.
+### Upload path + size/type enforcement
+- Reworked client-side uploads to go through a server route so uploads no longer rely on public Storage insert policies.
+- Added server-side validation for file size/type and path prefix enforcement (`listings/...`).
+- Files:
+  - `src/app/api/listing-media/route.ts`
+  - `src/components/image-uploader.tsx`
 
-## Key Changes
+### Open redirect prevention (`next` param)
+- Sanitized `next` so only internal paths are allowed.
+- File:
+  - `src/app/auth/actions.ts`
 
-- Added custom auth helpers for sign-up, sign-in, sign-out, password hashing, session hashing, and HTTP-only session cookies.
-- Added an `/auth` page with phone number and password flows.
-- Updated listing creation to require a logged-in seller and to attach listings to `user_id`.
-- Updated seller dashboard access to resolve ownership from the logged-in session instead of URL credentials.
-- Updated the database plan with `marketplace_users`, `marketplace_sessions`, and listing ownership migration support.
-- Added server-only Supabase admin client support through `SUPABASE_SERVICE_ROLE_KEY`.
+### Rate limiting + incremental delay on sign-in
+- Added in-memory rate limiting keyed by `IP + phone number`.
+- Added incremental delays on failures and a temporary lockout after repeated failures.
+- File:
+  - `src/app/auth/actions.ts`
 
-## Files Added
+### Session cookie hardening
+- Added `maxAge` and session rotation (deletes existing sessions for the user on new login).
+- File:
+  - `src/lib/auth.ts`
 
-- `src/app/auth/actions.ts`
-- `src/app/auth/page.tsx`
-- `src/components/auth-form.tsx`
-- `src/lib/auth.ts`
-- `src/lib/schemas/auth.ts`
-- `supabase/migrations/003_phone_auth.sql`
-
-## Functional Notes
-
-- Favorites are local-first and do not require sign-in.
-- Seller management now uses phone number and password login with cookie-based sessions.
-- Public pages only expose approved and available listings.
-- Device image upload uses Supabase Storage and needs the related bucket policy setup from the new migration.
-- Preview listings still work when Supabase is not configured, but live auth, seller actions, and uploads stay disabled without the required server and public environment variables.
-
-## Follow-up For Testing Phase
-
-- Run lint.
-- Run TypeScript validation.
-- Attempt a production build if the environment supports a complete Next.js install.
-- Record outcomes in `.pipeline/tests.md`.
-
-## 2026-07-01 Profile Editing
-
-### Implementation Summary
-
-Added a dedicated authenticated user page so signed-in sellers can edit their profile details, and linked the header user chip directly to that page.
-
-### Key Changes
-
-- Added `src/app/user/page.tsx` to serve as the user profile page.
-- Added `src/app/user/actions.ts` with a server action to update profile data.
-- Added `src/components/profile-form.tsx` for editing display name and WhatsApp number.
-- Extended `src/lib/schemas/auth.ts` with `profileSchema` for shared validation.
-- Extended `src/lib/types.ts` with `ProfileActionState`.
-- Updated `src/components/header.tsx` so clicking the signed-in user name routes to `/user`.
-
-### Functional Notes
-
-- Profile updates write to `marketplace_users`.
-- The update flow also syncs `seller_name` and `whatsapp_number` across the user’s listings.
-- Relevant public and seller-facing routes are revalidated after a successful update.
+### Baseline security headers
+- Added CSP starter, nosniff, referrer-policy, and permissions-policy.
+- File:
+  - `next.config.ts`

@@ -1,35 +1,24 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState, type ChangeEvent } from "react";
-import { getStorageBucketName, getSupabaseBrowserClient, hasSupabaseEnv } from "@/lib/supabase";
+import { useState, type ChangeEvent } from "react";
 
 type ImageUploaderProps = {
   onChange: (urls: string[]) => void;
 };
 
+const maxUploadBytes = 10 * 1024 * 1024;
+const allowedMimeTypes = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
+
 export function ImageUploader({ onChange }: ImageUploaderProps) {
   const [uploadedUrls, setUploadedUrls] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
-  const bucketName = useMemo(() => getStorageBucketName(), []);
 
   async function handleUpload(event: ChangeEvent<HTMLInputElement>) {
     const files = Array.from(event.target.files ?? []);
 
     if (files.length === 0) {
-      return;
-    }
-
-    if (!hasSupabaseEnv()) {
-      setError("Add Supabase environment variables before uploading images from device.");
-      return;
-    }
-
-    const supabase = getSupabaseBrowserClient();
-
-    if (!supabase) {
-      setError("Supabase is not available for uploads.");
       return;
     }
 
@@ -40,20 +29,28 @@ export function ImageUploader({ onChange }: ImageUploaderProps) {
       const nextUrls: string[] = [];
 
       for (const file of files) {
-        const safeName = file.name.replace(/\s+/g, "-").toLowerCase();
-        const path = `listings/${Date.now()}-${safeName}`;
-
-        const { error: uploadError } = await supabase.storage.from(bucketName).upload(path, file, {
-          cacheControl: "3600",
-          upsert: false,
-        });
-
-        if (uploadError) {
-          throw uploadError;
+        if (!allowedMimeTypes.has(file.type)) {
+          throw new Error("Unsupported image type.");
         }
 
-        const { data } = supabase.storage.from(bucketName).getPublicUrl(path);
-        nextUrls.push(data.publicUrl);
+        if (file.size <= 0 || file.size > maxUploadBytes) {
+          throw new Error("File is too large.");
+        }
+
+        const formData = new FormData();
+        formData.set("file", file);
+
+        const response = await fetch("/api/listing-media", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error("Upload failed.");
+        }
+
+        const payload: { publicUrl: string } = await response.json();
+        nextUrls.push(payload.publicUrl);
       }
 
       const mergedUrls = [...uploadedUrls, ...nextUrls];
@@ -74,7 +71,7 @@ export function ImageUploader({ onChange }: ImageUploaderProps) {
           Upload images from device
         </label>
         <input
-          accept="image/*"
+          accept="image/jpeg,image/png,image/webp,image/gif"
           className="field cursor-pointer"
           id="galleryUpload"
           multiple

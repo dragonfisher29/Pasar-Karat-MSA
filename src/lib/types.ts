@@ -53,3 +53,14 @@ export type ProfileActionState = {
   status: "idle" | "error" | "success";
   message?: string;
 };
+
+export type ResetPasswordState = {
+  status: "idle" | "error" | "success";
+  message?: string;
+};
+
+export type AdminPasswordResetState = {
+  status: "idle" | "error" | "success";
+  message?: string;
+  resetLink?: string;
+};

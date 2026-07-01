@@ -3,20 +3,6 @@ import { ListingCard } from "@/components/listing-card";
 import { categories } from "@/lib/constants";
 import { getFeaturedListings } from "@/lib/listings";
 
-const templateFields = [
-  "Images from device",
-  "Seller identity",
-  "WhatsApp contact",
-  "Item name",
-  "Description",
-  "Price",
-  "Condition",
-  "Rating",
-  "Category",
-  "Location",
-  "Payment method",
-];
-
 export default async function Home() {
   const listings = await getFeaturedListings();
 
