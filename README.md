@@ -39,13 +39,13 @@ Pasar Karat is a Vercel-ready community marketplace for pre-loved items. It turn
 npm install
 ```
 
-6. Start the dev server:
+1. Start the dev server:
 
 ```bash
 npm run dev
 ```
 
-7. Open [http://localhost:3000](http://localhost:3000).
+1. Open <http://localhost:3000>.
 
 ## Environment variables
 
@@ -71,3 +71,19 @@ This creates the listing schema, seller auth/session tables, and storage bucket 
 ## Deployment
 
 Deploy to Vercel and set the same environment variables in the Vercel project settings.
+
+<br />
+
+## Password Reset
+
+- Go to `/admin/password-reset` 
+- Enter the admin secret (the value of `PASAR_KARAT_ADMIN_RESET_SECRET` on the server)
+- Enter the seller’s phone number (same one they use to sign in)
+- Click **Generate link**
+- Copy the reset link and send it to the seller on WhatsApp
+- The seller opens the link, sets a new password, then signs in again
+
+  Notes:
+- The link expires in **20 minutes** and can be used once .
+- When the password is reset, the app revokes existing sessions so the user must sign in again.
+
