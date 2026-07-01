@@ -36,3 +36,24 @@ Replaced the one-time seller manage code flow with a simple phone-number-and-pas
 - Run TypeScript validation.
 - Attempt a production build if the environment supports a complete Next.js install.
 - Record outcomes in `.pipeline/tests.md`.
+
+## 2026-07-01 Profile Editing
+
+### Implementation Summary
+
+Added a dedicated authenticated user page so signed-in sellers can edit their profile details, and linked the header user chip directly to that page.
+
+### Key Changes
+
+- Added `src/app/user/page.tsx` to serve as the user profile page.
+- Added `src/app/user/actions.ts` with a server action to update profile data.
+- Added `src/components/profile-form.tsx` for editing display name and WhatsApp number.
+- Extended `src/lib/schemas/auth.ts` with `profileSchema` for shared validation.
+- Extended `src/lib/types.ts` with `ProfileActionState`.
+- Updated `src/components/header.tsx` so clicking the signed-in user name routes to `/user`.
+
+### Functional Notes
+
+- Profile updates write to `marketplace_users`.
+- The update flow also syncs `seller_name` and `whatsapp_number` across the user’s listings.
+- Relevant public and seller-facing routes are revalidated after a successful update.

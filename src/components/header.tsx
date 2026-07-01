@@ -39,7 +39,9 @@ export async function Header() {
           ))}
           {user ? (
             <>
-              <span className="surface-pill rounded-full px-4 py-2 text-sm font-semibold">{user.display_name}</span>
+              <Link className="surface-pill rounded-full px-4 py-2 text-sm font-semibold transition hover:-translate-y-0.5" href="/user">
+                {user.display_name}
+              </Link>
               <form action={signOut}>
                 <button className="rounded-full px-4 py-2 font-medium text-slate-600 transition hover:bg-violet-50 hover:text-violet-700" type="submit">
                   Sign out

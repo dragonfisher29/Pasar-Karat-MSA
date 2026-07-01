@@ -42,3 +42,19 @@ Approved.
 
 - Images remain unoptimized until the project standardizes allowed remote hosts and adds corresponding Next.js image configuration.
 - PowerShell users may need to prefer `npm.cmd` over `npm` if local execution policy blocks `npm.ps1`.
+
+## 2026-07-01 Profile Editing Verdict
+
+Approved.
+
+## Review Notes
+
+- The delivered scope matches the request: signed-in users now have a dedicated `/user` page, can edit profile details, and can reach that page by clicking their name in the header.
+- The implementation reuses the existing auth/session model and shared Zod validation patterns rather than introducing a parallel profile system.
+- Syncing updated profile details into existing listings reduces data drift between account information and seller-facing listing metadata.
+- Validation is strong for this change because lint, TypeScript, and production build all passed after the new route and action were added.
+
+## Residual Risk For Profile Editing
+
+- Profile edits currently update listing contact fields in bulk, so any future per-listing contact override feature would need a different sync strategy.
+- If Supabase server configuration is missing, the profile page still renders for signed-in users but updates remain unavailable until server env is configured.
