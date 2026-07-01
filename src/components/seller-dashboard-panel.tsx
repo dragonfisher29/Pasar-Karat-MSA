@@ -19,10 +19,10 @@ function SoldButton({ listingId }: { listingId: string }) {
   return (
     <form action={formAction} className="space-y-2">
       <input name="listingId" type="hidden" value={listingId} />
-      <button className="secondary-button rounded-full px-4 py-2 text-sm font-medium text-zinc-200" disabled={pending} type="submit">
+      <button className="secondary-button rounded-xl px-4 py-2 text-sm font-semibold" disabled={pending} type="submit">
         {pending ? "Updating..." : "Mark as sold"}
       </button>
-      {state.message ? <p className="text-xs text-zinc-400">{state.message}</p> : null}
+      {state.message ? <p className="text-xs text-slate-500">{state.message}</p> : null}
     </form>
   );
 }
@@ -31,8 +31,8 @@ export function SellerDashboardPanel({ listings }: SellerDashboardPanelProps) {
   return (
     <div className="grid gap-5">
       {listings.map((listing) => (
-        <article key={listing.id} className="glass-panel grid gap-5 rounded-[2rem] p-5 lg:grid-cols-[180px_1fr_auto]">
-          <div className="overflow-hidden rounded-[1.5rem] border border-white/10">
+        <article key={listing.id} className="glass-panel grid gap-5 rounded-[1rem] p-5 lg:grid-cols-[180px_1fr_auto]">
+          <div className="overflow-hidden rounded-[1rem] border border-slate-200">
             <Image
               alt={listing.name}
               className="aspect-[4/3] w-full object-cover"
@@ -53,19 +53,19 @@ export function SellerDashboardPanel({ listings }: SellerDashboardPanelProps) {
                 {listing.moderation_status}
               </span>
             </div>
-            <h3 className="text-2xl font-semibold text-white">{listing.name}</h3>
-            <p className="text-sm text-zinc-400">{listing.description}</p>
-            <p className="text-sm text-zinc-500">
+            <h3 className="text-2xl font-bold tracking-tight text-slate-900">{listing.name}</h3>
+            <p className="text-sm leading-6 text-slate-600">{listing.description}</p>
+            <p className="text-sm text-slate-500">
               {listing.location} · {listing.payment_method}
             </p>
           </div>
 
           <div className="flex flex-col items-start gap-3">
-            <p className="text-lg font-semibold text-rose-200">RM {listing.price}</p>
+            <p className="text-lg font-bold text-violet-700">RM {listing.price}</p>
             {listing.status === "available" ? (
               <SoldButton listingId={listing.id} />
             ) : (
-              <p className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-300">
+              <p className="rounded-full border border-cyan-200 bg-cyan-50 px-3 py-2 text-sm font-semibold text-cyan-700">
                 Sold
               </p>
             )}

@@ -19,7 +19,7 @@ export function ListingGallery({ images, name }: ListingGalleryProps) {
   const [activeImage, setActiveImage] = useState(gallery[0]);
 
   return (
-    <section className="glass-panel overflow-hidden rounded-[2rem]">
+    <section className="glass-panel overflow-hidden rounded-[1rem]">
       <div className="listing-image relative aspect-[5/4]">
         <Image
           alt={name}
@@ -36,7 +36,7 @@ export function ListingGallery({ images, name }: ListingGalleryProps) {
           <button
             key={`${image}-${index}`}
             className={`relative aspect-[4/3] overflow-hidden rounded-2xl border ${
-              activeImage === image ? "border-rose-200/40" : "border-white/10"
+              activeImage === image ? "border-violet-400 shadow-[0_10px_30px_rgba(107,56,212,0.15)]" : "border-slate-200"
             }`}
             onClick={() => setActiveImage(image)}
             type="button"

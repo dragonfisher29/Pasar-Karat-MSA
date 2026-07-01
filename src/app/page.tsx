@@ -17,70 +17,93 @@ const templateFields = [
   "Payment method",
 ];
 
+const dashboardStats = [
+  { label: "Searchable fields", value: "11", tone: "primary" },
+  { label: "Saved for later", value: "1 tap", tone: "secondary" },
+  { label: "WhatsApp handoff", value: "Instant", tone: "tertiary" },
+] as const;
+
 export default async function Home() {
   const listings = await getFeaturedListings();
 
   return (
     <div className="space-y-10">
       <section className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="glass-panel overflow-hidden rounded-[2rem] p-6 sm:p-8">
-          <span className="accent-pill inline-flex rounded-full px-3 py-1 text-xs font-medium uppercase tracking-[0.3em]">
-            Community marketplace
+        <div className="glass-panel overflow-hidden rounded-[1rem] p-6 sm:p-8">
+          <span className="surface-pill inline-flex rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]">
+            Vibrant marketplace
           </span>
-          <h2 className="mt-6 max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-            Turn your WhatsApp resale group into a polished web storefront.
-          </h2>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-zinc-400 sm:text-lg">
-            Pasar Karat gives your members a simple place to post pre-loved items, browse listings, and
-            keep everything searchable instead of buried in chat history.
+          <h2 className="page-title mt-6 max-w-4xl">Turn your WhatsApp resale group into a daylight-ready storefront.</h2>
+          <p className="page-copy mt-5 max-w-2xl">
+            Pasar Karat brings structure, search, and account-based seller management to the community flow your
+            members already know, with a bold dashboard UI that keeps every action obvious.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link className="cta-button rounded-full px-5 py-3 font-medium" href="/sell">
+            <Link className="cta-button rounded-xl px-5 py-3 font-semibold" href="/sell">
               Start selling
             </Link>
-            <Link className="secondary-button rounded-full px-5 py-3 font-medium text-zinc-200" href="/listings">
+            <Link className="secondary-button rounded-xl px-5 py-3 font-semibold" href="/listings">
               Browse listings
             </Link>
-            <Link className="secondary-button rounded-full px-5 py-3 font-medium text-zinc-200" href="/dashboard">
+            <Link className="secondary-button rounded-xl px-5 py-3 font-semibold" href="/dashboard">
               Seller dashboard
             </Link>
           </div>
+
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {dashboardStats.map((stat) => (
+              <div key={stat.label} className="metric-tile">
+                <p className="metric-label">{stat.label}</p>
+                <p className={`metric-value ${stat.tone} mt-3`}>{stat.value}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <aside className="glass-panel rounded-[2rem] p-6">
-          <p className="text-sm uppercase tracking-[0.35em] text-zinc-500">Listing template</p>
+        <aside className="glass-panel rounded-[1rem] p-6">
+          <p className="section-kicker">Listing template</p>
+          <h3 className="mt-3 text-2xl font-extrabold tracking-tight text-slate-900">Structured for fast posting</h3>
           <div className="mt-6 space-y-3">
-            {templateFields.map((field) => (
-              <div
-                key={field}
-                className="flex items-center justify-between rounded-2xl border border-white/8 bg-white/3 px-4 py-3 text-sm text-zinc-300"
-              >
-                <span>{field}</span>
-                <span className="text-zinc-500">Required</span>
+            {templateFields.map((field, index) => (
+              <div key={field} className="soft-card flex items-center justify-between px-4 py-3 text-sm text-slate-700">
+                <span className="font-medium">{field}</span>
+                <span className={index % 3 === 0 ? "surface-pill rounded-full px-3 py-1 text-xs font-semibold" : index % 3 === 1 ? "accent-pill rounded-full px-3 py-1 text-xs font-semibold" : "tertiary-pill rounded-full px-3 py-1 text-xs font-semibold"}>
+                  Required
+                </span>
               </div>
             ))}
           </div>
         </aside>
       </section>
 
-      <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="glass-panel rounded-[2rem] p-6">
-          <p className="text-sm uppercase tracking-[0.35em] text-zinc-500">Why it works</p>
-          <div className="mt-5 space-y-4 text-zinc-300">
-            <p>Members keep the same selling flow they already know from WhatsApp, now with structured seller info.</p>
-            <p>Buyers can save favorites, search categories, and contact sellers through WhatsApp in one tap.</p>
-            <p>Sellers can sign in with phone number and password to manage listings and mark items as sold without admin help.</p>
+      <section className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="glass-panel rounded-[1rem] p-6">
+          <p className="section-kicker">Why it works</p>
+          <h3 className="mt-3 text-2xl font-extrabold tracking-tight text-slate-900">Modern dashboard clarity with a familiar selling flow</h3>
+          <div className="mt-6 space-y-4 text-slate-600">
+            <div className="info-card p-4">
+              <p className="font-semibold text-slate-900">Structured listings</p>
+              <p className="mt-2 text-sm leading-6">Members keep the same resale details they already post in chat, now with searchable fields and stronger presentation.</p>
+            </div>
+            <div className="info-card p-4">
+              <p className="font-semibold text-slate-900">Fast buyer actions</p>
+              <p className="mt-2 text-sm leading-6">Buyers can filter categories, save favorites, and jump to WhatsApp once they are ready to close the deal.</p>
+            </div>
+            <div className="info-card p-4">
+              <p className="font-semibold text-slate-900">Account-linked control</p>
+              <p className="mt-2 text-sm leading-6">Sellers sign in with phone number and password so every listing stays manageable from one dashboard.</p>
+            </div>
           </div>
         </div>
 
-        <div className="glass-panel rounded-[2rem] p-6">
+        <div className="glass-panel rounded-[1rem] p-6">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <p className="text-sm uppercase tracking-[0.35em] text-zinc-500">Featured items</p>
-              <h3 className="mt-2 text-2xl font-semibold text-white">Fresh finds from the community</h3>
+              <p className="section-kicker">Featured items</p>
+              <h3 className="mt-2 text-2xl font-extrabold tracking-tight text-slate-900">Fresh finds from the community</h3>
             </div>
-            <Link className="accent-link text-sm font-medium" href="/listings">
+            <Link className="accent-link text-sm font-semibold" href="/listings">
               View all
             </Link>
           </div>
@@ -93,22 +116,22 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="glass-panel rounded-[2rem] p-6">
+      <section className="glass-panel rounded-[1rem] p-6">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <p className="text-sm uppercase tracking-[0.35em] text-zinc-500">Categories</p>
-            <h3 className="mt-2 text-2xl font-semibold text-white">Browse the kinds of items your community sells most</h3>
+            <p className="section-kicker">Categories</p>
+            <h3 className="mt-2 text-2xl font-extrabold tracking-tight text-slate-900">Browse the items your community sells most</h3>
           </div>
-          <Link className="accent-link text-sm font-medium" href="/favorites">
+          <Link className="accent-link text-sm font-semibold" href="/favorites">
             View favorites
           </Link>
         </div>
 
         <div className="mt-6 flex flex-wrap gap-3">
-          {categories.map((category) => (
+          {categories.map((category, index) => (
             <Link
               key={category}
-              className="surface-pill rounded-full px-4 py-2 text-sm transition hover:border-rose-200/25 hover:text-rose-50"
+              className={index % 3 === 0 ? "surface-pill rounded-full px-4 py-2 text-sm font-semibold transition hover:-translate-y-0.5" : index % 3 === 1 ? "accent-pill rounded-full px-4 py-2 text-sm font-semibold transition hover:-translate-y-0.5" : "tertiary-pill rounded-full px-4 py-2 text-sm font-semibold transition hover:-translate-y-0.5"}
               href={`/listings?category=${encodeURIComponent(category)}`}
             >
               {category}

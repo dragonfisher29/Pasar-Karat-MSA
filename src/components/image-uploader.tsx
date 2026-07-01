@@ -69,8 +69,8 @@ export function ImageUploader({ onChange }: ImageUploaderProps) {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-[1.5rem] border border-dashed border-white/12 bg-white/4 p-4">
-        <label className="mb-3 block text-sm font-medium text-zinc-300" htmlFor="galleryUpload">
+      <div className="soft-card rounded-[1rem] border-dashed p-4">
+        <label className="mb-3 block text-sm font-semibold text-slate-700" htmlFor="galleryUpload">
           Upload images from device
         </label>
         <input
@@ -81,16 +81,16 @@ export function ImageUploader({ onChange }: ImageUploaderProps) {
           onChange={handleUpload}
           type="file"
         />
-        <p className="mt-3 text-sm text-zinc-500">
+        <p className="mt-3 text-sm text-slate-500">
           {uploading ? "Uploading images..." : "Upload up to several listing photos into Supabase Storage."}
         </p>
-        {error ? <p className="mt-2 text-sm text-red-300">{error}</p> : null}
+        {error ? <p className="mt-2 text-sm font-medium text-rose-600">{error}</p> : null}
       </div>
 
       {uploadedUrls.length > 0 ? (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {uploadedUrls.map((url) => (
-            <div key={url} className="relative overflow-hidden rounded-2xl border border-white/10">
+            <div key={url} className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white">
               <Image
                 alt="Uploaded listing preview"
                 className="aspect-[4/3] w-full object-cover"

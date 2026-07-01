@@ -14,8 +14,8 @@ export function FavoriteButton({ listingId }: FavoriteButtonProps) {
     <button
       className={`rounded-full border px-3 py-2 text-xs font-medium transition ${
         active
-          ? "border-rose-200/20 bg-rose-300/20 text-rose-50"
-          : "surface-pill hover:border-rose-200/25 hover:text-rose-50"
+          ? "border-pink-200 bg-pink-50 text-pink-700"
+          : "border-slate-200 bg-white/90 text-slate-600 hover:-translate-y-0.5 hover:border-violet-200 hover:text-violet-700"
       }`}
       onClick={() => toggleFavorite(listingId)}
       type="button"

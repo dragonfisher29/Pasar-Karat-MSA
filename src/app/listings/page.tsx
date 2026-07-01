@@ -27,12 +27,12 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
 
   return (
     <div className="space-y-8">
-      <section className="glass-panel rounded-[2rem] p-6 sm:p-8">
+      <section className="glass-panel rounded-[1rem] p-6 sm:p-8">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.35em] text-zinc-500">Listings</p>
-            <h2 className="mt-3 text-4xl font-semibold tracking-tight text-white">Browse pre-loved items</h2>
-            <p className="mt-4 max-w-2xl text-zinc-400">
+            <p className="section-kicker">Listings</p>
+            <h2 className="page-title mt-3">Browse pre-loved items</h2>
+            <p className="page-copy mt-4 max-w-2xl">
               Searchable listings replace chat clutter and help buyers compare price, condition, and payment
               preference in one place.
             </p>
@@ -41,14 +41,14 @@ export default async function ListingsPage({ searchParams }: ListingsPageProps) 
             <span className="accent-pill inline-flex rounded-full px-3 py-2 text-sm font-medium">
               {usingLiveData ? "Supabase connected" : "Using preview data"}
             </span>
-            <Link className="cta-button rounded-full px-5 py-3 font-medium" href="/sell">
+            <Link className="cta-button rounded-xl px-5 py-3 font-semibold" href="/sell">
               Post your item
             </Link>
           </div>
         </div>
 
         {params?.posted === "1" ? (
-          <p className="mt-5 rounded-2xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300">
+          <p className="mt-5 rounded-2xl border border-cyan-200 bg-cyan-50 px-4 py-3 text-sm font-medium text-cyan-700">
             Your listing was published successfully.
           </p>
         ) : null}

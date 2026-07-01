@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { signOut } from "@/app/auth/actions";
 import { getCurrentUser } from "@/lib/auth";
+import { Logo } from "@/components/logo";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -14,23 +15,23 @@ export async function Header() {
   const user = await getCurrentUser();
 
   return (
-    <header className="glass-panel sticky top-4 z-20 mb-8 rounded-full px-4 py-3 sm:px-6">
+    <header className="glass-panel sticky top-4 z-20 mb-8 rounded-[1rem] px-4 py-4 sm:px-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <Link className="flex items-center gap-3" href="/">
-          <div className="brand-mark flex h-11 w-11 items-center justify-center rounded-full text-sm font-semibold">
-            PK
+          <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl">
+            <Logo className="h-11 w-11" />
           </div>
           <div>
-            <p className="text-sm uppercase tracking-[0.35em] text-zinc-500">Community resale</p>
-            <h1 className="text-lg font-semibold">Pasar Karat</h1>
+            <p className="section-kicker">Community resale</p>
+            <h1 className="text-lg font-extrabold tracking-tight text-slate-900">Pasar Karat</h1>
           </div>
         </Link>
 
-        <nav className="flex flex-wrap items-center gap-2 text-sm text-zinc-300">
+        <nav className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
           {navLinks.map((link) => (
             <Link
               key={link.href}
-              className="rounded-full px-4 py-2 transition hover:bg-white/5 hover:text-white"
+              className="rounded-full px-4 py-2 font-medium transition hover:bg-violet-50 hover:text-violet-700"
               href={link.href}
             >
               {link.label}
@@ -38,15 +39,15 @@ export async function Header() {
           ))}
           {user ? (
             <>
-              <span className="rounded-full border border-white/10 px-4 py-2 text-zinc-200">{user.display_name}</span>
+              <span className="surface-pill rounded-full px-4 py-2 text-sm font-semibold">{user.display_name}</span>
               <form action={signOut}>
-                <button className="rounded-full px-4 py-2 transition hover:bg-white/5 hover:text-white" type="submit">
+                <button className="rounded-full px-4 py-2 font-medium text-slate-600 transition hover:bg-violet-50 hover:text-violet-700" type="submit">
                   Sign out
                 </button>
               </form>
             </>
           ) : (
-            <Link className="rounded-full px-4 py-2 transition hover:bg-white/5 hover:text-white" href="/auth">
+            <Link className="rounded-full px-4 py-2 font-medium text-slate-600 transition hover:bg-violet-50 hover:text-violet-700" href="/auth">
               Sign in
             </Link>
           )}

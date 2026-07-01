@@ -16,7 +16,7 @@ function SubmitButton() {
   const { pending } = useFormStatus();
 
   return (
-    <button className="cta-button rounded-full px-5 py-3 font-medium" disabled={pending} type="submit">
+    <button className="cta-button rounded-xl px-5 py-3 font-semibold" disabled={pending} type="submit">
       {pending ? "Publishing..." : "Publish listing"}
     </button>
   );
@@ -31,37 +31,37 @@ export function SellForm({ user }: SellFormProps) {
   const [galleryImageUrls, setGalleryImageUrls] = useState<string[]>([]);
 
   return (
-    <form action={formAction} className="glass-panel grid gap-5 rounded-[2rem] p-6 sm:grid-cols-2">
+    <form action={formAction} className="glass-panel grid gap-5 rounded-[1rem] p-6 sm:grid-cols-2">
       <div className="sm:col-span-2">
-        <label className="mb-2 block text-sm font-medium text-zinc-300" htmlFor="sellerNamePreview">
+        <label className="mb-2 block text-sm font-semibold text-slate-700" htmlFor="sellerNamePreview">
           Seller name
         </label>
         <input className="field" defaultValue={user.display_name} id="sellerNamePreview" readOnly />
       </div>
 
       <div className="sm:col-span-2">
-        <label className="mb-2 block text-sm font-medium text-zinc-300" htmlFor="whatsappPreview">
+        <label className="mb-2 block text-sm font-semibold text-slate-700" htmlFor="whatsappPreview">
           WhatsApp number
         </label>
         <input className="field" defaultValue={user.phone_number} id="whatsappPreview" readOnly />
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-medium text-zinc-300" htmlFor="name">
+        <label className="mb-2 block text-sm font-semibold text-slate-700" htmlFor="name">
           Item name
         </label>
         <input className="field" id="name" name="name" placeholder="Vintage armchair" required />
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-medium text-zinc-300" htmlFor="price">
+        <label className="mb-2 block text-sm font-semibold text-slate-700" htmlFor="price">
           Price
         </label>
         <input className="field" id="price" min="1" name="price" placeholder="120" required step="0.01" type="number" />
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-medium text-zinc-300" htmlFor="condition">
+        <label className="mb-2 block text-sm font-semibold text-slate-700" htmlFor="condition">
           Condition
         </label>
         <select className="field" defaultValue="" id="condition" name="condition" required>
@@ -77,14 +77,14 @@ export function SellForm({ user }: SellFormProps) {
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-medium text-zinc-300" htmlFor="rating">
+        <label className="mb-2 block text-sm font-semibold text-slate-700" htmlFor="rating">
           Rating
         </label>
         <input className="field" id="rating" max="5" min="1" name="rating" placeholder="4" required type="number" />
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-medium text-zinc-300" htmlFor="category">
+        <label className="mb-2 block text-sm font-semibold text-slate-700" htmlFor="category">
           Category
         </label>
         <select className="field" defaultValue="" id="category" name="category" required>
@@ -100,14 +100,14 @@ export function SellForm({ user }: SellFormProps) {
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-medium text-zinc-300" htmlFor="location">
+        <label className="mb-2 block text-sm font-semibold text-slate-700" htmlFor="location">
           Meetup location
         </label>
         <input className="field" id="location" name="location" placeholder="Address" required />
       </div>
 
       <div className="sm:col-span-2">
-        <label className="mb-2 block text-sm font-medium text-zinc-300" htmlFor="paymentMethod">
+        <label className="mb-2 block text-sm font-semibold text-slate-700" htmlFor="paymentMethod">
           Payment method
         </label>
         <input
@@ -125,7 +125,7 @@ export function SellForm({ user }: SellFormProps) {
       </div>
 
       <div className="sm:col-span-2">
-        <label className="mb-2 block text-sm font-medium text-zinc-300" htmlFor="description">
+        <label className="mb-2 block text-sm font-semibold text-slate-700" htmlFor="description">
           Description
         </label>
         <textarea
@@ -139,11 +139,11 @@ export function SellForm({ user }: SellFormProps) {
 
       <div className="sm:col-span-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-sm text-zinc-400">
+          <p className="text-sm text-slate-500">
             Template fields mirror the original WhatsApp group format, with richer media and account-based seller management.
           </p>
           {state.message ? (
-            <p className={state.status === "error" ? "mt-2 text-sm text-red-300" : "mt-2 text-sm text-emerald-300"}>
+            <p className={state.status === "error" ? "mt-2 text-sm font-medium text-rose-600" : "mt-2 text-sm font-medium text-cyan-700"}>
               {state.message}
             </p>
           ) : null}

@@ -1,17 +1,25 @@
 @import "tailwindcss";
 
 :root {
-  color-scheme: dark;
-  --background: #140e12;
-  --background-soft: rgba(40, 26, 33, 0.82);
-  --foreground: #fff6f8;
-  --muted: #dbc5ce;
-  --border: rgba(255, 228, 236, 0.12);
-  --panel: rgba(255, 232, 239, 0.07);
-  --accent: #c67b93;
-  --accent-strong: #9f5d74;
-  --accent-soft: rgba(198, 123, 147, 0.28);
-  --accent-foreground: #ffe8ef;
+  color-scheme: light;
+  --background: #faf8ff;
+  --background-soft: #ffffff;
+  --background-subtle: #f2f3ff;
+  --background-strong: #eaedff;
+  --foreground: #131b2e;
+  --foreground-soft: #494454;
+  --muted: #6a738b;
+  --border: #e2e8f0;
+  --border-strong: #cbc3d7;
+  --panel: #f8faff;
+  --primary: #6b38d4;
+  --primary-strong: #5516be;
+  --primary-soft: rgba(107, 56, 212, 0.1);
+  --secondary: #b4136d;
+  --secondary-soft: rgba(180, 19, 109, 0.1);
+  --tertiary: #006577;
+  --tertiary-soft: rgba(0, 101, 119, 0.1);
+  --on-primary: #ffffff;
 }
 
 * {
@@ -26,11 +34,11 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at top, rgba(198, 123, 147, 0.2), transparent 34%),
-    radial-gradient(circle at right, rgba(118, 74, 87, 0.18), transparent 32%),
-    linear-gradient(180deg, #1d1419 0%, #140e12 55%, #0e090c 100%);
+    radial-gradient(circle at top left, rgba(107, 56, 212, 0.12), transparent 28%),
+    radial-gradient(circle at top right, rgba(253, 86, 167, 0.12), transparent 30%),
+    linear-gradient(180deg, #ffffff 0%, #faf8ff 36%, #f2f3ff 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: inherit;
 }
 
 a {
@@ -44,85 +52,144 @@ img {
 }
 
 .glass-panel {
+  position: relative;
   background: var(--background-soft);
   border: 1px solid var(--border);
-  box-shadow: 0 24px 80px rgba(9, 4, 7, 0.38);
-  backdrop-filter: blur(20px);
+  box-shadow:
+    0 18px 50px rgba(107, 56, 212, 0.08),
+    0 2px 0 rgba(255, 255, 255, 0.8) inset;
+}
+
+.glass-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  border-radius: inherit;
+  background: linear-gradient(180deg, var(--primary), var(--secondary));
+  pointer-events: none;
 }
 
 .text-muted {
   color: var(--muted);
 }
 
+.section-kicker {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.page-title {
+  color: var(--foreground);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.page-copy {
+  color: var(--foreground-soft);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
 .accent-pill {
-  border: 1px solid rgba(255, 223, 232, 0.14);
-  background: rgba(97, 61, 73, 0.92);
-  color: var(--accent-foreground);
+  border: 1px solid rgba(180, 19, 109, 0.12);
+  background: var(--secondary-soft);
+  color: var(--secondary);
 }
 
 .surface-pill {
-  border: 1px solid rgba(255, 223, 232, 0.12);
-  background: rgba(52, 35, 42, 0.94);
-  color: #f8e5eb;
+  border: 1px solid rgba(107, 56, 212, 0.12);
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.tertiary-pill {
+  border: 1px solid rgba(0, 101, 119, 0.12);
+  background: var(--tertiary-soft);
+  color: var(--tertiary);
 }
 
 .accent-link {
-  color: var(--accent-foreground);
-  transition: color 0.2s ease;
+  color: var(--primary);
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .accent-link:hover {
-  color: #fff7fa;
+  color: var(--primary-strong);
+  transform: translateY(-1px);
 }
 
 .brand-mark {
-  border: 1px solid rgba(255, 223, 232, 0.14);
-  background: rgba(198, 123, 147, 0.18);
-  color: var(--accent-foreground);
+  border: 1px solid rgba(107, 56, 212, 0.12);
+  background: linear-gradient(135deg, var(--primary), #8455ef);
+  box-shadow: 0 14px 32px rgba(107, 56, 212, 0.22);
+  color: var(--on-primary);
 }
 
 .cta-button {
-  background: linear-gradient(135deg, #cf8da0, #9f5d74);
-  color: #ffffff;
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, var(--primary), #8455ef);
+  color: var(--on-primary);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
 
 .cta-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 18px 40px rgba(159, 93, 116, 0.32);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(107, 56, 212, 0.2);
 }
 
 .secondary-button {
-  background: rgba(255, 237, 242, 0.05);
-  border: 1px solid var(--border);
-  color: #f8e5eb;
+  border: 2px solid rgba(107, 56, 212, 0.22);
+  background: transparent;
+  color: var(--primary);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.secondary-button:hover {
+  transform: translateY(-2px);
+  background: var(--primary-soft);
+  box-shadow: 0 16px 30px rgba(107, 56, 212, 0.12);
 }
 
 .listing-image {
   background:
-    linear-gradient(180deg, transparent 12%, rgba(23, 15, 19, 0.94) 100%),
-    linear-gradient(135deg, rgba(198, 123, 147, 0.3), rgba(53, 34, 42, 0.48));
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(19, 27, 46, 0.16)),
+    linear-gradient(135deg, rgba(107, 56, 212, 0.14), rgba(253, 86, 167, 0.14));
 }
 
 .field {
   width: 100%;
-  border-radius: 1rem;
-  border: 1px solid var(--border);
-  background: rgba(255, 238, 243, 0.07);
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-strong);
+  background: #ffffff;
   padding: 0.9rem 1rem;
   color: var(--foreground);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
 .field:focus {
-  outline: 1px solid rgba(255, 223, 232, 0.3);
-  outline-offset: 0;
-  border-color: rgba(255, 223, 232, 0.28);
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(107, 56, 212, 0.12);
 }
 
 .field::placeholder {
-  color: #cfb3be;
+  color: #8d8a96;
 }
 
 select.field {
@@ -130,8 +197,55 @@ select.field {
 }
 
 select.field option {
-  background: #2c1c24;
+  background: #ffffff;
   color: var(--foreground);
+}
+
+.metric-tile {
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--panel);
+  padding: 1.25rem;
+}
+
+.metric-label {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.metric-value {
+  color: var(--foreground);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.metric-value.primary {
+  color: var(--primary);
+}
+
+.metric-value.secondary {
+  color: var(--secondary);
+}
+
+.metric-value.tertiary {
+  color: var(--tertiary);
+}
+
+.soft-card {
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--background-subtle);
+}
+
+.info-card {
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: #ffffff;
 }
 
 button:disabled {

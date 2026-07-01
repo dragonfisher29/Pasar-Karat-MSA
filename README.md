@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./public/logo.svg" alt="Pasar Karat logo" width="120" />
+</p>
+
 # Pasar Karat MSA
 
 Pasar Karat is a Vercel-ready community marketplace for pre-loved items. It turns a WhatsApp-based selling flow into a searchable website powered by Next.js and Supabase.
@@ -12,7 +16,7 @@ Pasar Karat is a Vercel-ready community marketplace for pre-loved items. It turn
 
 ## Features
 
-- Premium dark landing page for the marketplace concept
+- Vibrant high-contrast marketplace UI with a custom repo logo
 - Public listings page with search and filtering
 - Listing detail page with WhatsApp seller contact
 - Sell form based on the WhatsApp item template with device image uploads

@@ -19,10 +19,10 @@ export function FavoriteListingsGrid({ listings }: FavoriteListingsGridProps) {
 
   if (favoriteListings.length === 0) {
     return (
-      <section className="glass-panel rounded-[2rem] px-6 py-12 text-center">
-        <p className="text-sm uppercase tracking-[0.35em] text-zinc-500">No saved items yet</p>
-        <h2 className="mt-3 text-3xl font-semibold text-white">Start saving your favorite finds</h2>
-        <p className="mx-auto mt-4 max-w-2xl text-zinc-400">
+      <section className="glass-panel rounded-[1rem] px-6 py-12 text-center">
+        <p className="section-kicker">No saved items yet</p>
+        <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">Start saving your favorite finds</h2>
+        <p className="mx-auto mt-4 max-w-2xl text-slate-600">
           Tap the save button on any listing card to keep a shortlist of items you want to revisit later.
         </p>
       </section>

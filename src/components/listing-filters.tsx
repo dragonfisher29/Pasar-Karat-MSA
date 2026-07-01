@@ -9,7 +9,7 @@ type ListingFiltersProps = {
 
 export function ListingFilters({ query, category, condition, maxPrice }: ListingFiltersProps) {
   return (
-    <form className="glass-panel grid gap-4 rounded-[2rem] p-5 lg:grid-cols-[1.4fr_repeat(3,0.8fr)_auto]">
+    <form className="glass-panel grid gap-4 rounded-[1rem] p-5 lg:grid-cols-[1.4fr_repeat(3,0.8fr)_auto]">
       <input className="field" defaultValue={query} name="query" placeholder="Search items, description, or seller" />
 
       <select className="field" defaultValue={category} name="category">
@@ -40,7 +40,7 @@ export function ListingFilters({ query, category, condition, maxPrice }: Listing
         type="number"
       />
 
-      <button className="cta-button rounded-full px-5 py-3 font-medium" type="submit">
+      <button className="cta-button rounded-xl px-5 py-3 font-semibold" type="submit">
         Apply
       </button>
     </form>
