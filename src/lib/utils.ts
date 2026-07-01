@@ -18,9 +18,9 @@ export function buildWhatsAppUrl(phone: string, listingName: string) {
 }
 
 export function formatPrice(price: number) {
-  return new Intl.NumberFormat("en-MY", {
+  return new Intl.NumberFormat("en-GB", {
     style: "currency",
-    currency: "MYR",
+    currency: "GBP",
     maximumFractionDigits: 0,
   }).format(price);
 }

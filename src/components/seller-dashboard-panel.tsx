@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useActionState } from "react";
 import { markListingAsSold } from "@/app/dashboard/actions";
 import type { SellerDashboardListing, SellerDashboardState } from "@/lib/types";
+import { formatPrice } from "@/lib/utils";
 
 const initialState: SellerDashboardState = {
   status: "idle",
@@ -61,7 +62,7 @@ export function SellerDashboardPanel({ listings }: SellerDashboardPanelProps) {
           </div>
 
           <div className="flex flex-col items-start gap-3">
-            <p className="text-lg font-bold text-violet-700">RM {listing.price}</p>
+            <p className="text-lg font-bold text-violet-700">{formatPrice(listing.price)}</p>
             {listing.status === "available" ? (
               <SoldButton listingId={listing.id} />
             ) : (

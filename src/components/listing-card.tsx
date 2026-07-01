@@ -20,16 +20,17 @@ export function ListingCard({ listing }: ListingCardProps) {
           src={listing.image_url}
           unoptimized
         />
-        <div className="absolute inset-x-0 bottom-0 flex items-center justify-between p-5">
+      </div>
+
+      <div className="space-y-4 p-5">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap gap-2">
             <span className="accent-pill rounded-full px-3 py-1 text-xs font-medium">{listing.condition}</span>
             <span className="tertiary-pill rounded-full px-3 py-1 text-xs font-medium">{listing.category}</span>
           </div>
           <FavoriteButton listingId={listing.id} />
         </div>
-      </div>
 
-      <div className="space-y-4 p-5">
         <div className="flex items-start justify-between gap-3">
           <div>
             <h2 className="text-xl font-bold tracking-tight text-slate-900">{listing.name}</h2>
